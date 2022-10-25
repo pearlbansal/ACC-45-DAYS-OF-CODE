@@ -122,4 +122,99 @@ void solve(vector<int>&nums,int ind,vector<vector<int>>&ans,int max)
 
 };
 
+# DAY 4
+QUESTION:
+# Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
 
+The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+
+The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
+
+SOLUTION:
+	class Solution {
+public:
+
+//global values shared between both function
+vector<vector<int>>result;
+vector<int>current;
+int sum;
+
+void function(vector<int>& candidates,int target,int index)
+{
+    if(sum>target)return ;//base case if sum is greater then target then return 
+    
+    if(sum==target){
+        result.push_back(current);//id sum is equal to target then just add current to result
+    }
+    for(int i=index;i<candidates.size();i++){
+        sum+=candidates[i];//and current value to sum
+        current.push_back(candidates[i]);//and current value to current vector
+        function(candidates,target,i);//again reccure for same index i
+        sum-=candidates[i];//back track mean remove value that previously added
+        current.pop_back();//remove the value that previously added to current 
+    }      
+}
+
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    sum=0; // This sum is global you can see it on the top of code just a clarify if you have any doubt
+    function(candidates,target,0);//i make result current and sum global to reduce the size of function for simplecity
+    return result;//This result is also global 
+}
+};
+'''
+Now second approch is bit tricky you have to be bit carefull or you can solve this approch using pen and paper
+
+'''
+class Solution {
+public:
+
+vector<vector<int>>result;
+vector<int>current;
+
+void function(vector<int>& candidates,int target,int index)
+{
+    if(target==0){
+        result.push_back(current);
+        return;
+    }
+    
+    if(index==candidates.size() || target<0)return;
+    
+    current.push_back(candidates[index]);
+    function(candidates,target-candidates[index],index);
+    current.pop_back();
+    function(candidates,target,index+1);      
+}
+
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    function(candidates,target,0);
+    return result;
+}
+	
+# DAY 5
+QUESTION:
+# Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+SOLUTION:
+	class Solution {
+public:
+  vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>>ans;
+        int n=strs.size();
+        map<string,vector<string>>mp;
+        for(int i=0;i<n;i++){
+            string temp=strs[i];
+            sort(strs[i].begin(),strs[i].end());
+            mp[strs[i]].push_back(temp);
+        }
+        for(auto it:mp){
+            ans.push_back(it.second);
+        }
+        return ans;
+    }
+};
+ 
+	
+	
