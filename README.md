@@ -292,3 +292,26 @@ public:
 };		      
 	
 	
+# DAY 7
+QUESTION:
+# Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+
+You must write an algorithm with O(log n) runtime complexity.
+
+SOLUTION:
+	class Solution {
+public:
+
+vector<int> searchRange(vector<int>& nums, int tg) {
+    int x1=lower_bound(nums.begin(),nums.end(),tg)-nums.begin();
+    int x2=upper_bound(nums.begin(),nums.end(),tg)-nums.begin()-1;
+    if(binary_search(nums.begin(),nums.end(),tg))
+    {
+        return {x1,x2};
+    }
+    return {-1,-1};
+}
+};
+ 
