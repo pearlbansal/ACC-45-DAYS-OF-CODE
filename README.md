@@ -371,3 +371,51 @@ bool helper(vector<vector<char>> &board, int row, int col) {
 void solveSudoku(vector<vector<char>>& board) {
     helper(board, 0, 0);
 }
+
+#DAY 9
+QUESTION:
+	You are given two jugs with capacities jug1Capacity and jug2Capacity liters. There is an infinite amount of water supply available. Determine whether it is possible to measure exactly targetCapacity liters using these two jugs.
+
+If targetCapacity liters of water are measurable, you must have targetCapacity liters of water contained within one or both buckets by the end.
+
+Operations allowed:
+
+Fill any of the jugs with water.
+Empty any of the jugs.
+Pour water from one jug into another till the other jug is completely full, or the first jug itself is empty.
+ 
+SOLUTION:
+	'class Solution
+{
+public:
+    bool canMeasureWater(int x, int y, int z)
+    {
+        if (x + y == z || x == z || y == z)
+            return true;
+        if (x + y < z)
+            return false;
+        int m = x + y; // max capacity
+        vector<int> v = {x, -x, y, -y};
+        queue<int> q;
+        q.push(0);
+        vector<int> vis(m + 1, 0);
+        vis[0] = 1;
+        while (!q.empty())
+        {
+            int curr = q.front();
+            q.pop();
+            if (curr == z)
+                return true;
+            for (int i = 0; i < 4; i++)
+            {
+                int k = curr + v[i];
+                if (k >= 0 && k <= m && vis[k] == 0)
+                {
+                    q.push(k);
+                    vis[k] = 1;
+                }
+            }
+        }
+        return false;
+    }
+};
