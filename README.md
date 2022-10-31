@@ -317,9 +317,9 @@ vector<int> searchRange(vector<int>& nums, int tg) {
  
 # DAY 8
 QUESTION:
-	Write a program to solve a Sudoku puzzle by filling the empty cells.
+# Write a program to solve a Sudoku puzzle by filling the empty cells.
 
-A sudoku solution must satisfy all of the following rules:
+# A sudoku solution must satisfy all of the following rules:
 
 Each of the digits 1-9 must occur exactly once in each row.
 Each of the digits 1-9 must occur exactly once in each column.
@@ -374,7 +374,7 @@ void solveSudoku(vector<vector<char>>& board) {
 
 #DAY 9
 QUESTION:
-	You are given two jugs with capacities jug1Capacity and jug2Capacity liters. There is an infinite amount of water supply available. Determine whether it is possible to measure exactly targetCapacity liters using these two jugs.
+# You are given two jugs with capacities jug1Capacity and jug2Capacity liters. There is an infinite amount of water supply available. Determine whether it is possible to measure exactly targetCapacity liters using these two jugs.
 
 If targetCapacity liters of water are measurable, you must have targetCapacity liters of water contained within one or both buckets by the end.
 
@@ -423,7 +423,7 @@ public:
 
 # DAY 10	
 QUESTION:
-	You are given the head of a singly linked-list. The list can be represented as:
+# You are given the head of a singly linked-list. The list can be represented as:
 
 L0 → L1 → … → Ln - 1 → Ln
 Reorder the list to be on the following form:
@@ -478,7 +478,8 @@ public:
 };
 
 # DAY 11
-QUESTION:Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+QUESTION:
+#  Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
 SOLUTION:
