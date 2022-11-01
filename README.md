@@ -499,3 +499,42 @@ public:
     }
 };
 		    
+# DAY 12
+QUESTION:
+# Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*' where:
+
+'?' Matches any single character.
+'*' Matches any sequence of characters (including the empty sequence).
+The matching should cover the entire input string (not partial).
+SOLUTION:
+int dp[2005][2005];
+class Solution {
+public:
+    string src , pat ;
+    vector<int> yesOrNo ;
+    bool solve(int i , int j){
+        if(i < src.size() and j >= pat.size()) return false ;
+        if(i >= src.size()) return j < pat.size() ? yesOrNo[j] : true ;
+		
+        if(dp[i][j] != -1) return dp[i][j] ;
+        
+        if(src[i] == pat[j] || pat[j] == '?') return dp[i][j] = solve(i + 1, j + 1);
+        else if(pat[j] == '*') return dp[i][j] = solve(i + 1, j) or solve(i ,j + 1 ) ;
+        return dp[i][j] = false ;
+    }
+    bool isMatch(string src, string pat) {
+        for(int i = 0 ; i <= max(src.size(),pat.size()) ; ++i )
+            for(int j = 0 ; j < max(src.size(),pat.size()); ++j) 
+                dp[i][j] = -1 ;
+        
+        this->src = src  , this->pat = pat  ;
+        yesOrNo.resize(pat.size(),0) ;
+        
+        for(int i = pat.size() - 1;  i>= 0 ; --i ){
+            if(pat[i] != '*') break ;
+            yesOrNo[i] = 1 ;
+        }
+        
+        return solve(0,0) ;
+    }
+};
