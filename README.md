@@ -538,3 +538,32 @@ public:
         return solve(0,0) ;
     }
 };
+# DAY 13
+QUESTION:
+# Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
+
+Integers in each row are sorted in ascending from left to right.
+Integers in each column are sorted in ascending from top to bottom.
+SOLUTION:
+	class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int row = matrix.size();
+        int col = matrix[0].size();
+        
+        int rowIdx = 0;
+        int colIdx = col-1;
+        while(rowIdx < row && colIdx >=0){
+            int e = matrix[rowIdx][colIdx];
+            if(e==target){
+                return true;
+            }
+            if(e<target){
+                rowIdx++;
+            }
+            else{
+                colIdx--;
+            }
+        }
+        return 0;
+    }	    
