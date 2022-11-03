@@ -567,3 +567,25 @@ public:
         }
         return 0;
     }	    
+# DAY 14
+# Given an unsorted integer array nums, return the smallest missing positive integer.
+
+You must implement an algorithm that runs in O(n) time and uses constant extra space.
+solution:
+	class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int index=0,out=0,org=1;
+        set<int>s;
+        for(int it:nums)    s.insert(it);
+        for(auto itr:s){
+            if(itr>0){
+                if(itr!=org)    return org;
+                org++;
+            }
+            index++;
+        }
+        return org;
+    }
+};	    
+		    
