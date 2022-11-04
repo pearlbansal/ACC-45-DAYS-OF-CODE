@@ -588,4 +588,29 @@ public:
         return org;
     }
 };	    
-		    
+# DAY 15
+QUESTION:
+# You are given an integer array nums. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position.
+
+Return true if you can reach the last index, or false otherwise.
+SOLUTION:
+	class Solution {
+public:
+    bool f(int index,int n, vector<int>& nums, vector<int>&dp)
+    {
+        if(index ==n-1) return true;
+        if(dp[index] != -1) return dp[index];
+        for(int i = 1; i<=nums[index]; i++)
+        {
+            if(f(index+i,n,nums,dp)==true)
+                return dp[index] = true;
+        }
+        return dp[index] = false;
+    }
+    bool canJump(vector<int>& nums) {
+        int  n = nums.size();
+        vector<int>dp(n+1,-1);
+        return f(0,n,nums,dp);
+       
+    }
+};
