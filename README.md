@@ -655,3 +655,30 @@ public:
         else return (firstQ.size() > secQ.size())? firstQ.top():secQ.top(); 
     }
 };
+# DAY 17
+QUESTION:
+# Given an array rectangles where rectangles[i] = [xi, yi, ai, bi] represents an axis-aligned rectangle. The bottom-left point of the rectangle is (xi, yi) and the top-right point of it is (ai, bi).
+
+# Return true if all the rectangles together form an exact cover of a rectangular region.
+SOLUTION:
+	class Solution {
+public:
+    bool isRectangleCover(vector<vector<int>>& rectangles) {
+        map<pair<int, int>, int> mark;
+        for(vector<int>& x:rectangles){
+            mark[{x[0], x[1]}]++;
+            mark[{x[0], x[3]}]--;
+            mark[{x[2], x[1]}]--;
+            mark[{x[2], x[3]}]++;
+        }
+        int n_mark=0;
+        for(auto ptr=mark.begin();ptr!=mark.end();ptr++)
+            if(ptr->second!=0){
+                if(abs(ptr->second)!=1) return false;
+                n_mark++;
+            }
+        return n_mark==4;
+    }
+};
+
+ 
