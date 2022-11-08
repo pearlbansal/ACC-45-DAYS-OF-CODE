@@ -683,9 +683,9 @@ public:
     }
 };
 
-#DAY 18
-	QUESTION:
-#Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+# DAY 18
+QUESTION:
+# Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
 Symbol       Value
 I             1
