@@ -721,3 +721,46 @@ int romanToInt(string s) {
 }
 };
 	
+# DAY 19
+QUESTION:
+# You are playing the Bulls and Cows game with your friend.
+
+# You write down a secret number and ask your friend to guess what the number is. When your friend makes a guess, you provide a hint with the following info:
+
+# The number of "bulls", which are digits in the guess that are in the correct position.
+The number of "cows", which are digits in the guess that are in your secret number but are located in the wrong position. Specifically, the non-bull digits in the guess that could be rearranged such that they become bulls.
+# Given the secret number secret and your friend's guess guess, return the hint for your friend's guess.
+
+The hint should be formatted as "xAyB", where x is the number of bulls and y is the number of cows. Note that both secret and guess may contain duplicate digits.
+SOLUTION:
+	class Solution {
+public:
+    string getHint(string secret, string guess) {
+        vector<int> cowsS(10, 0);
+        vector<int> cowsG(10, 0);
+
+        int bulls{0}, cows{0};
+        for (int i{0}; i<secret.size(); ++i) {
+            // if the numbers in the positions match then it's a bull
+            if (secret[i]==guess[i]) bulls++;
+            else {
+                // we add bulls corresponding to the numbers (eg, if secret[i]=5)
+                // ascii of 5 is 53 and ascii of 0 is 48 and therefore 53-48 = 5 which is the poition given in secret[i]
+                cowsS[secret[i]-'0']++;
+                cowsG[guess[i]-'0']++;
+            }
+        }
+
+        for (int i{0}; i<cowsG.size(); ++i) {
+            // let's day cowsS[4]=5, it means that '4' is present 5 times in secret
+            // same goes for cowsS. The minimum of either gives the number of matches (the extra ones can't match)
+            cows+=min(cowsG[i], cowsS[i]);
+        }
+
+        // to_string converts ascii to integer. (eg., '5' to 5)
+        return to_string(bulls)+'A'+to_string(cows)+'B';
+
+    }
+};
+
+ 
