@@ -804,4 +804,37 @@ public:
     }
 };
 
- 
+# DAY 21
+QUESTION:
+# Given a string paragraph and a string array of the banned words banned, return the most frequent word that is not banned. It is guaranteed there is at least one word that is not banned, and that the answer is unique.
+
+# The words in paragraph are case-insensitive and the answer should be returned in lowercase.
+SOLUTION:
+	class Solution {
+public:
+    string mostCommonWord(string paragraph, vector<string>& banned) {
+        string temp;
+        vector<string> words;
+        for(char c:paragraph){
+            if(isalpha(c) && !isspace(c)) temp+=tolower(c);
+            else{
+                if(temp.length()) words.push_back(temp);
+                temp="";
+            }
+        }
+        if(temp.length()) words.push_back(temp);
+        
+        map<string,int> mp;
+        for(string i:words) mp[i]++;
+        for(string i:banned) mp[i]=0;
+        string ans;
+        int maxUsedFreq=0;
+        for(auto i:mp){
+            if(i.second>maxUsedFreq){ 
+                ans=i.first;
+                maxUsedFreq=i.second;
+            }
+        }
+        return ans;
+    }
+};	
