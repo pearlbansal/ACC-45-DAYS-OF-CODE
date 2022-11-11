@@ -838,3 +838,51 @@ public:
         return ans;
     }
 };	
+
+# DAY 22
+QUESTION:
+# You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.
+
+# You are given an integer array nums representing the data status of this set after the error.
+
+# Find the number that occurs twice and the number that is missing and return them in the form of an array.
+SOLUTIION:
+	 ``vector<int> findErrorNums(vector<int>& nums) {
+        vector<int>v;
+        int t=0;//will store missing number
+        int p=0;//will store repeated number 
+		
+         unordered_map<int,int>m;
+        //storing frequency of each number in map
+         for(int i=0;i<nums.size();++i)
+          {
+              m[nums[i]]++; 
+          }
+        //If frequency of any number is 2 -> store it in p
+          for(auto it:m)
+          {
+              if(it.second==2)
+              {
+                  p=it.first;
+              }
+             
+          }
+        //check for missing number 
+        //search for key , if key is not present store missing number in t 
+           for(int i=1;i<=nums.size();++i)
+           {
+               auto x=m.find(i);
+               if(x==m.end())
+               {
+                   t=i;
+               }
+           }
+   
+        v.push_back(p);
+        v.push_back(t);
+   
+       
+        return v;
+    }
+
+ 
