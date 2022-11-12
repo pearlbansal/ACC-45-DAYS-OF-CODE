@@ -884,5 +884,24 @@ SOLUTIION:
        
         return v;
     }
+# DAY 23
+ QUESTION:
+# Given the root of a binary tree, return the inorder traversal of its nodes' values.
+SOLUTION:
+	
+class Solution {
+public:
+    vector<int> ans;
 
- 
+    void solve(TreeNode* root) {
+        if(root != NULL) {
+            solve(root->left);
+            ans.push_back(root->val);
+            solve(root->right);
+        }
+    }
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        solve(root);
+        return ans;
+    }				
