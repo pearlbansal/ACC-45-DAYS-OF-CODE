@@ -993,3 +993,42 @@ public:
         return NULL;
     }
 };
+
+# DAY 27
+QUESTION:
+# You have a lock in front of you with 4 circular wheels. Each wheel has 10 slots: '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'. The wheels can rotate freely and wrap around: for example we can turn '9' to be '0', or '0' to be '9'. Each move consists of turning one wheel one slot.
+# The lock initially starts at '0000', a string representing the state of the 4 wheels.
+# You are given a list of deadends dead ends, meaning if the lock displays any of these codes, the wheels of the lock will stop turning and you will be unable to open it.
+# Given a target representing the value of the wheels that will unlock the lock, return the minimum total number of turns required to open the lock, or -1 if it is impossible.
+SOLUTION:
+	class Solution {
+public:
+    int openLock(vector<string>& deadends, string target) {
+        unordered_set<string> deadSet(deadends.begin(), deadends.end());
+        if (deadSet.count("0000")) return -1;
+        queue<string> q({"0000"});
+        for (int steps = 0; !q.empty(); ++steps) {
+            for (int i = q.size(); i > 0; --i) {
+                auto curr = q.front(); q.pop();
+                if (curr == target) return steps;
+                for (auto nei : neighbors(curr)) {
+                    if (deadSet.count(nei)) continue;
+                    deadSet.insert(nei); // Marked as visited
+                    q.push(nei);
+                }
+            }
+        }
+        return -1;
+    }
+    vector<string> neighbors(const string& code) {
+        vector<string> result;
+        for (int i = 0; i < 4; i++) {
+            for (int diff = -1; diff <= 1; diff += 2) {
+                string nei = code;
+                nei[i] = (nei[i] - '0' + diff + 10) % 10 + '0';
+                result.push_back(nei);
+            }
+        }
+        return result;
+    }
+};
