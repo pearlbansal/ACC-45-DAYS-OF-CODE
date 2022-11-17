@@ -1032,3 +1032,21 @@ public:
         return result;
     }
 };
+
+# DAY 27
+QUESTION:
+# You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.
+
+# You should convert Celsius into Kelvin and Fahrenheit and return it as an array ans = [kelvin, fahrenheit].
+
+# Return the array ans. Answers within 10-5 of the actual answer will be accepted.
+SOLUTION:
+	class Solution {
+public:
+    vector<double> convertTemperature(double celsius) {
+        double k= celsius+273.15;         //convert celsius to kelvin using the formula : k= c+273.15
+        double f= (celsius*1.80)+32.00;  //convert celsius to farenheit using the formula : f= (c*1.8)+32
+        vector<double> ans= {k,f};      //store the temperature in kelvin and fahrenheit in vector
+        return ans;                    // return the ans
+    }
+};
