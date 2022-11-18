@@ -1033,7 +1033,7 @@ public:
     }
 };
 
-# DAY 27
+# DAY 28
 QUESTION:
 # You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.
 
@@ -1048,5 +1048,47 @@ public:
         double f= (celsius*1.80)+32.00;  //convert celsius to farenheit using the formula : f= (c*1.8)+32
         vector<double> ans= {k,f};      //store the temperature in kelvin and fahrenheit in vector
         return ans;                    // return the ans
+    }
+};
+
+# DAY 29
+QUESTION:
+# Given a fixed-length integer array arr, duplicate each occurrence of zero, shifting the remaining elements to the right.
+SOLUTION:
+	class Solution {
+public:
+    void duplicateZeros(vector<int>& arr) {
+        int cnt=0;
+        int st,end;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]==0){
+                cnt++;
+                if(cnt==arr.size()){
+                    arr[arr.size()-1]=0;
+                    st=i-1;
+                    end=arr.size()-2;
+                }
+            }
+            cnt++;
+            if(cnt==arr.size()){
+                st=i;
+                end=arr.size()-1;
+            }
+        }
+        // cout<<st<<" "<<end;
+        while(st>=0){
+            if(arr[st]==0){
+                arr[end]=0;
+                end--;
+                arr[end]=0;
+                end--;
+                st--;
+            }
+            else{
+                arr[end]=arr[st];
+                end--;
+                st--;
+            }
+        }
     }
 };
