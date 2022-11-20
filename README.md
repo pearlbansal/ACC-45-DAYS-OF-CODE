@@ -1121,3 +1121,27 @@ public:
                 
     }
 };
+
+	
+# DAY 31
+QUESTION:
+# Given an array of positive integers arr, return the sum of all possible odd-length subarrays of arr.
+
+# A subarray is a contiguous subsequence of the array.
+SOLUTION:
+	class Solution {
+public:
+    int sumOddLengthSubarrays(vector<int>& arr) {
+        int n = arr.size(), oddSum{0};
+        for (int i=1; i<=n; i+=2) {
+            int j=0;
+            while (i+j<=n) {
+                for (int k{0}; k<i; ++k) {
+                    oddSum+=arr[k+j];
+                }
+                j++;
+            }
+        }
+        return oddSum;
+    }
+};
