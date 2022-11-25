@@ -1173,7 +1173,7 @@ public:
     }
 };
 				    
-# DAY 32
+# DAY 33
 QUESTION:
 # There is a robot starting at the position (0, 0), the origin, on a 2D plane. Given a sequence of its moves, judge if this robot ends up at (0, 0) after it completes its moves.
 # You are given a string moves that represents the move sequence of the robot where moves[i] represents its ith move. Valid moves are 'R' (right), 'L' (left), 'U' (up), and 'D' (down).
@@ -1237,3 +1237,32 @@ public:
 	   return -1;
     }
 };
+#DAY 36
+QUESTION:
+# You are given an integer n. A 0-indexed integer array nums of length n + 1 is generated in the following way:
+
+# nums[0] = 0
+# nums[1] = 1
+# nums[2 * i] = nums[i] when 2 <= 2 * i <= n
+# nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
+# Return the maximum integer in the array nums​​​.
+SOLUTION:
+class Solution {
+public:
+    int getMaximumGenerated(int n) {
+        vector<int> dp(n + 1, 0);
+        if(n == 0)
+            return 0;
+        dp[1] = 1;
+        int maxi = 1;
+        for(int i = 2; i <= n; ++i){
+            if(i & 1)
+                dp[i] = dp[i >> 1] + dp[(i >> 1) + 1];
+            else 
+                dp[i] = dp[i >> 1];
+            maxi = max(maxi, dp[i]);
+        }
+        return maxi;
+    }
+};
+ 
