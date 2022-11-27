@@ -1237,7 +1237,8 @@ public:
 	   return -1;
     }
 };
-#DAY 36
+	
+# DAY 36
 QUESTION:
 # You are given an integer n. A 0-indexed integer array nums of length n + 1 is generated in the following way:
 
