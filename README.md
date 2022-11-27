@@ -1266,3 +1266,59 @@ public:
     }
 };
  
+# DAY 37
+# You are playing the following Nim Game with your friend:
+
+# Initially, there is a heap of stones on the table.
+# You and your friend will alternate taking turns, and you go first.
+# On each turn, the person whose turn it is will remove 1 to 3 stones from the heap.
+# The one who removes the last stone is the winner.
+# Given n, the number of stones in the heap, return true if you can win the game assuming both you and your friend play optimally, otherwise return false.
+SOLUTION:
+	class Solution {
+public:
+    bool canWinNim(int n) {
+        if(n%4!=0){
+            return true;
+        }
+        return false;
+    }
+};
+
+# DAY 38
+QUESTION:
+#Given an array arr of integers, check if there exist two indices i and j such that :
+
+# i != j
+# 0 <= i, j < arr.length
+# arr[i] == 2 * arr[j]
+SOLUTION:
+	class Solution {
+public:
+    bool checkIfExist(vector<int>& arr) {
+		
+		//decalred a boolean variable ans and initialised it to false
+        bool ans = false;
+		
+		//iterate over the vector and find two elements where either ,
+		// (i) first = 2*second
+		// (ii) first/2 = second
+		
+		/*** Don't forget to check that the one multiplied or divided with 2 , should be 
+		a even number otherwise ( for 7,3  => 7/2 = 3 will return true)  ***/
+		
+        for(int i=0;i<arr.size();++i){		
+            for(int j=0;j<arr.size();++j){
+                if(i!=j && ((arr[i]%2==0 && arr[i]==2*arr[j]) || (arr[i]%2==0 && arr[i]/2==arr[j]))){
+				
+				//if found any such pair then assign true to the boolean variable ans and exit from the for loop
+				//as there is no need to check further
+				
+                    ans = true;
+                    break;
+                }
+            }
+        }
+         return ans;
+    }
+};
