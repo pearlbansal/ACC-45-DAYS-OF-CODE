@@ -1341,3 +1341,25 @@ public:
         return ones;
     }
 };
+
+# DAY 40
+QUESTION:'
+# You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
+
+# Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return if n new flowers can be planted in the # flowerbed without violating the no-adjacent-flowers rule.
+SOLUTION:class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& fbd, int n) {
+        for(int i = 0; i < fbd.size(); ++i){
+            if(n == 0) break; // all plants are planted, let's stop !!!
+            if((i == 0 || fbd[i-1] == 0) && fbd[i] != 1){ //checking left adj and if this place is already planted
+                if(i == fbd.size()-1 || fbd[i+1] == 0){ //checking right adj
+                    //now since the conditions are met we can plant here....
+                    n--; // reducing the plants, since we are planting one
+                    fbd[i] = 1;  // planting the plant !!
+                }
+            }
+        }
+        return n==0;
+    }
+};
