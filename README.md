@@ -1386,3 +1386,32 @@ SOLUTION:
             res += min(a[--m], b[--n]); // Shared character in a & b
     return a.substr(0, m) + b.substr(0, n) + string(rbegin(res), rend(res));
 }
+# DAY 42
+QUESTION:
+# You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.
+
+# You are given an integer array nums representing the data status of this set after the error.
+
+# Find the number that occurs twice and the number that is missing and return them in the form of an array.
+SOLUTION:class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        vector<int> res;
+        bitset<10001> table; 
+        int m = nums.size();
+        int sum = (1+m)*m>>1;
+        int act = 0;
+        for(int i=0;i<m;i++){
+            act+=nums[i];
+            if(!table.test(nums[i])){
+                table.set(nums[i]);
+            }
+            else{
+                res.push_back(nums[i]);
+            }
+        }
+        res.push_back(sum-act+res[0]);
+        return res;
+    }
+};
+ 
