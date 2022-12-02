@@ -1415,3 +1415,38 @@ public:
     }
 };
  
+# DAY 43
+QUESTION:
+# You are given a 0-indexed 2D integer array flowers, where flowers[i] = [starti, endi] means the ith flower will be in full bloom from starti to endi (inclusive). # # You are also given a 0-indexed integer array persons of size n, where persons[i] is the time that the ith person will arrive to see the flowers.
+# Return an integer array answer of size n, where answer[i] is the number of flowers that are in full bloom when the ith person arrives.
+SOLUTION:
+	class Solution {
+public:
+    vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons) {
+        map<int, int> cnt;
+        int n = persons.size();
+        for(auto &f : flowers) {
+            cnt[f[0]]++;
+            cnt[f[1] + 1]--;
+        }
+        cnt[1e9 + 1000] = cnt.rbegin()->second;
+        vector<vector<int> > ps(persons.size());
+        for(int i = 0; i < persons.size(); i++) {
+            ps[i] = {persons[i], i};
+        }
+        sort(ps.begin(), ps.end());
+        int sum = 0;
+        vector<int> ans(n);
+        int i = 0;
+        for(auto &it : cnt) {
+            int t = it.first, c = it.second;
+            while(i < n && ps[i][0] < t) {
+                ans[ps[i][1]] = sum;
+                i++;
+            }
+            sum += c;
+        }
+        return ans;
+    }
+};
+ 
