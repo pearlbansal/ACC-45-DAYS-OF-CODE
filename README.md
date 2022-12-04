@@ -372,7 +372,7 @@ void solveSudoku(vector<vector<char>>& board) {
     helper(board, 0, 0);
 }
 
-#DAY 9
+# DAY 9
 QUESTION:
 # You are given two jugs with capacities jug1Capacity and jug2Capacity liters. There is an infinite amount of water supply available. Determine whether it is possible to measure exactly targetCapacity liters using these two jugs.
 
